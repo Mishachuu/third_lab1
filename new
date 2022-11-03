@@ -1,0 +1,59 @@
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QFileDialog, QAction 
+from PyQt5.QtGui import QPixmap, QFont, QIcon, QMovie
+import Iterator
+import first
+import second
+import third
+import os
+import sys
+
+
+class Window(QMainWindow):
+    def __init__(self) -> None:
+        super(Window, self).__init__()
+        self.path = ""
+        while self.path == "":
+            self.path = QtWidgets.QFileDialog.getExistingDirectory(
+                self, 'Выберите папку dataset')
+
+        self.setWindowTitle("Чукарев Михаил 6211")
+        self.resize(800, 600)
+        self.statusBar()
+        self.
+
+        menubar = self.menuBar()
+        CreateCsv = menubar.addMenu('&Create Csv')
+        gift = menubar.addMenu("Gift")
+        #self.movie = QMovie("cat-cat-ghoul.gif")
+        # self.imageLabel.setMovie(self.movie)
+        # self.movie.start()
+        self.CreateCsvDataset = QAction("&Create Csv Dataset...", self)
+        self.CreateCsvRandom = QAction("&Create Csv Random Dataset", self)
+        self.CreateCsvAnother = QAction("&Create Csv Another Dataset", self)
+        CreateCsv.addAction(self.CreateCsvDataset)
+        CreateCsv.addAction(self.CreateCsvRandom)
+        CreateCsv.addAction(self.CreateCsvAnother)
+
+        self.imageLabel = QtWidgets.QLabel(self)
+        # self.imageLabel.setText("{EQ")
+        self.imageLabel.setGeometry(110, 59, 581, 321)
+        self.nextbutton = QtWidgets.QPushButton(self)
+        self.nextbutton.setGeometry(
+            600, 560, 200, 40)
+        self.nextbutton.setText("Следующая картинка")
+        self.previousbutton = QtWidgets.QPushButton(self)
+        self.previousbutton.setGeometry(0, 560, 200, 40)
+        self.previousbutton.setText("Предыдущая картинка")
+
+
+def application():
+    app = QApplication(sys.argv)
+    window = Window()
+
+    window.show()
+    sys.exit(app.exec_())
+
+
+if __name__ == "__main__":
+    application()

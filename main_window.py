@@ -1,12 +1,15 @@
-#импорт файлов из гита
-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QFileDialog
+from PyQt5.QtGui import QPixmap, QFont, QIcon
+import Iterator
+import first
+import second
+import third
+import os
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        #описание  label  и итератора path
+        # описание  label  и итератора path
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -43,7 +46,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.Image = QtWidgets.QLabel(self.verticalLayoutWidget_3)
         self.Image.setText("")
-        self.Image.setPixmap(QtGui.QPixmap(f"{path}"))
+        #self.Image.setPixmap(QtGui.QPixmap(f"{path}"))
         self.Image.setObjectName("Image")
         self.verticalLayout_3.addWidget(self.Image)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -72,10 +75,12 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-    #верхнее меню
+    # верхнее меню
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Чукарев Михаил 6211"))
+        MainWindow.setWindowTitle(_translate(
+            "MainWindow", "Чукарев Михаил 6211"))
         self.pushButtonPrevious.setText(_translate("MainWindow", "Previous"))
         self.pushButtonNext.setText(_translate("MainWindow", "Next"))
         self.menuCreate_csv.setTitle(_translate("MainWindow", "Create csv"))
@@ -85,9 +90,10 @@ class Ui_MainWindow(object):
             _translate("MainWindow", "change dataset"))
         self.actionrandom_dataset.setText(
             _translate("MainWindow", "random dataset"))
-        
-#добавить функцию некст и превью
-#добавить функцию label для csv
+
+# добавить функцию некст и превью
+# добавить функцию label для csv
+
 
 if __name__ == "__main__":
     import sys
