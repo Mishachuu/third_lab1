@@ -1,25 +1,28 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QFileDialog, QAction
-from PyQt5.QtGui import QPixmap, QFont, QIcon, QMovie
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QLabel, QFileDialog, QAction,
+                             QToolTip, QCheckBox, QPushButton, QMessageBox, QHBoxLayout, QVBoxLayout, QLabel, QActionGroup)
+from PyQt5.QtGui import (QPixmap, QFont, QIcon, QMovie)
+from PyQt5.QtCore import (Qt, QCoreApplication, QThread, QObject)
+import os
+import sys
 import Iterator
 import first
 import second
 import third
-import os
-import sys
 
 
 class Window(QMainWindow):
     def __init__(self) -> None:
         super(Window, self).__init__()
-        self.path = ""
-        while self.path == "":
+        self.folderpath = ""
+        while self.folderpath == "":
             self.folderpath = QtWidgets.QFileDialog.getExistingDirectory(
                 self, 'Выберите папку dataset')
 
         self.setWindowTitle("Чукарев Михаил 6211")
         self.resize(800, 600)
         self.statusBar()
+
         # self.
 
         menubar = self.menuBar()
@@ -29,41 +32,55 @@ class Window(QMainWindow):
         # self.imageLabel.setMovie(self.movie)
         # self.movie.start()
         self.CreateCsvDataset = QAction("Create Csv Dataset...", self)
-        self.CreateCsvRandom = QAction("Create Csv + create Random Dataset", self)
+        self.CreateCsvRandom = QAction(
+            "Create Csv + create Random Dataset", self)
         self.CreateCsvAnother = QAction("Create Csv + Another Dataset", self)
         CreateCsv.addAction(self.CreateCsvDataset)
         CreateCsv.addAction(self.CreateCsvRandom)
         CreateCsv.addAction(self.CreateCsvAnother)
+        self.CreateCsvAnother
 
         self.imageLabel = QtWidgets.QLabel(self)
         self.imageLabel.setGeometry(110, 59, 581, 321)
-        
+
         self.nextbutton = QtWidgets.QPushButton(self)
-        #self.nextbutton.setText("Следующая картинка")
         self.nextbutton.setIcon(QIcon('1.png'))
-        self.nextbutton.setIconSize(QtCore.QSize(250,150))
+        self.nextbutton.setIconSize(QtCore.QSize(250, 150))
         self.nextbutton.setGeometry(
             670, 560, 130, 40)
+        #self.nextbutton.clicked.connect(self.next())
         self.previousbutton = QtWidgets.QPushButton(self)
         self.previousbutton.setIcon(QIcon('2.png'))
-        self.previousbutton.setIconSize(QtCore.QSize(250,150))
-        #self.previousbutton.setText("Предыдущая картинка")
+        self.previousbutton.setIconSize(QtCore.QSize(250, 150))
         self.previousbutton.setGeometry(
             0, 560, 130, 40)
+        # self.previousbutton.clicked.connect(self.previous)
         self.classbutton = QtWidgets.QPushButton(self)
         self.classbutton.setText("Cat")
         self.classbutton.setGeometry(
             310, 560, 200, 40)
+        # self.classbutton.clicked.connect(self.clas)
 
-def Create_Csv_Dataset(self)->None:
+
+def Create_Csv_Dataset(self) -> None:
     first.main(self.folderpath)
-    
-def Create_Csv_AnotherDataset(self)->None:
-    second.main(self.folderpath) 
-    
-def Create_Csv_RandomDataset(self)->None:
+
+
+def Create_Csv_AnotherDataset(self) -> None:
+    second.main(self.folderpath)
+
+
+def Create_Csv_RandomDataset(self) -> None:
     third.main(self.folderpath)
-    
+
+
+def next(self):
+    print()
+
+
+def previous(self):
+    print()
+
 
 def application():
     app = QApplication(sys.argv)

@@ -15,13 +15,13 @@ def copy_random_number(subdir:str,folderpath) -> None:
         file_writer = csv.writer(w_file, delimiter=";", lineterminator="\n")
         for i in range(1020):
             rand_number = random.randint(0, 10000)
-            if (os.path.isfile(get_way.get_absolute_way(subdir, i, "download")) == True):
-                while (os.path.isfile(get_way.get_absolute_way(subdir, rand_number, "random")) == True):
+            if (os.path.isfile(get_way.get_absolute_way(subdir, i, "download",folderpath)) == True):
+                while (os.path.isfile(get_way.get_absolute_way(subdir, rand_number, "random",folderpath)) == True):
                     rand_number = random.randint(0, 10000)
                 shutil.copyfile(get_way.get_absolute_way(
-                    subdir, i, "download"), get_way.get_absolute_way(subdir, rand_number, "random"))
+                    subdir, i, "download",folderpath), get_way.get_absolute_way(subdir, rand_number, "random"))
                 file_writer.writerow([get_way.get_absolute_way(
-                    subdir, i, "download"), get_way.relative_way_random(rand_number), subdir])
+                    subdir, i, "download",folderpath), get_way.relative_way_random(rand_number,folderpath), subdir])
 
 
 def main(folderpath):
@@ -33,9 +33,9 @@ def main(folderpath):
         file_writer.writerow(
             ["Абсолютный путь", "Относительный путь", "Класс"])
     class_name = "cat"
-    copy_random_number(class_name)
+    copy_random_number(class_name,folderpath)
     class_name = "dog"
-    copy_random_number(class_name)
+    copy_random_number(class_name,folderpath)
 
 
 

@@ -4,7 +4,7 @@ import shutil
 import csv
 
 #копирование в другую директорию
-def copy_to_another(subdir:str)->None:
+def copy_to_another(subdir:str,folderpath)->None:
     """копирует файлы(картинки) в другую директорию и создает csv файл и записывает туда абсолютный и относительный путь
     Args:
         subdir (str): название подкотолога(класса)
@@ -12,11 +12,11 @@ def copy_to_another(subdir:str)->None:
     with open("annotation_changed.csv", mode="a", encoding='utf-8') as w_file:
         file_writer = csv.writer(w_file, delimiter=";", lineterminator="\n")
         for i in range(1020):
-            if (os.path.isfile(get_way.get_absolute_way(subdir, i, "download")) == True):
+            if (os.path.isfile(get_way.get_absolute_way(subdir, i, "download",folderpath)) == True):
                 shutil.copyfile(get_way.get_absolute_way(
-                    subdir, i, "download"), get_way.get_absolute_way(subdir, i, "changed"))
+                    subdir, i, "download"), get_way.get_absolute_way(subdir, i, "changed",folderpath))
                 file_writer.writerow([get_way.get_absolute_way(
-                    subdir, i, "download"), get_way.relative_way_changed(subdir, i), subdir])
+                    subdir, i, "download",folderpath), get_way.relative_way_changed(subdir, i), subdir])
 
 
 def main(folderpath):
@@ -28,9 +28,9 @@ def main(folderpath):
         file_writer.writerow(
             ["Абсолютный путь", "Относительный путь", "Класс"])
     class_name = "cat"
-    copy_to_another(class_name)
+    copy_to_another(class_name,folderpath)
     class_name = "dog"
-    copy_to_another(class_name)
+    copy_to_another(class_name,folderpath)
     print("Конец")
 
 
