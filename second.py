@@ -13,13 +13,14 @@ def copy_to_another(subdir: str, folderpath) -> None:
     with open("annotation_changed.csv", mode="a", encoding='utf-8') as w_file:
         file_writer = csv.writer(w_file, delimiter=";", lineterminator="\n")
         for i in range(1020):
-            relative_way = f'dataset/{subdir}/{str(i).zfill(4)}.jpg'
-            absolute_way = f'{folderpath}/{subdir}/{str(i).zfill(4)}.jpg'
-            if (os.path.isfile(absolute_way) == True):
+            relative_way = f'dataset/changed_dataset/{subdir}_{str(i).zfill(4)}.jpg'
+            absolute_way = os.path.abspath(relative_way)
+            absolute_way_dataset = os.path.abspath(
+                f"{folderpath}/{subdir}/{str(i).zfill(4)}.jpg")
+            if (os.path.isfile(absolute_way_dataset) == True):
                 shutil.copyfile(
-                    absolute_way, f"{folderpath}/changed_dataset/{str(i).zfill(4)}")
-                file_writer.writerow(
-                    f"{folderpath}/{subdir}/{str(i).zfill(4)}.jpg", f"dataset/changed_dataset/{subdir}_{str(i).zfill(4)}.jpg", subdir)
+                    absolute_way_dataset, absolute_way)
+                file_writer.writerow([absolute_way, relative_way, subdir])
 
 
 def main(folderpath):

@@ -14,13 +14,15 @@ def copy_random_number(subdir: str, folderpath) -> None:
         file_writer = csv.writer(w_file, delimiter=";", lineterminator="\n")
         for i in range(1020):
             rand_number = random.randint(0, 10000)
-            relative_way = f'dataset/random_dataset/{rand_number}'
-            absolute_way = f'{folderpath}/random_dataset/{rand_number}'
-            if (os.path.isfile(f"{folderpath}/{subdir}/{str(i).zfill(4)}") == True):
+            relative_way = f'dataset/random_dataset/{rand_number}.jpg'
+            absolute_way = os.path.abspath(relative_way)
+            absolute_way_dataset = os.path.abspath(
+                f"{folderpath}/{subdir}/{str(i).zfill(4)}.jpg")
+            if (os.path.isfile(absolute_way_dataset) == True):
                 while (os.path.isfile(absolute_way) == True):
                     rand_number = random.randint(0, 10000)
                 shutil.copyfile(
-                    f"{folderpath}/{subdir}/{str(i).zfill(4)}", absolute_way)
+                    absolute_way_dataset, absolute_way)
                 file_writer.writerow([absolute_way, relative_way, subdir])
 
 
