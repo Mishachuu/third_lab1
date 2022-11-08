@@ -1,11 +1,10 @@
 import os
-import get_way
 import shutil
 import csv
 import random
 
 
-def copy_random_number(subdir:str,folderpath) -> None:
+def copy_random_number(subdir: str, folderpath) -> None:
     """скопирует данные(картинки) из директории dataset/subdir, а так же создаст csv файл
 
     Args:
@@ -15,13 +14,14 @@ def copy_random_number(subdir:str,folderpath) -> None:
         file_writer = csv.writer(w_file, delimiter=";", lineterminator="\n")
         for i in range(1020):
             rand_number = random.randint(0, 10000)
-            if (os.path.isfile(get_way.get_absolute_way(subdir, i, "download",folderpath)) == True):
-                while (os.path.isfile(get_way.get_absolute_way(subdir, rand_number, "random",folderpath)) == True):
+            relative_way = f'dataset/random_dataset/{rand_number}'
+            absolute_way = f'{folderpath}/random_dataset/{rand_number}'
+            if (os.path.isfile(f"{folderpath}/{subdir}/{str(i).zfill(4)}") == True):
+                while (os.path.isfile(absolute_way) == True):
                     rand_number = random.randint(0, 10000)
-                shutil.copyfile(get_way.get_absolute_way(
-                    subdir, i, "download",folderpath), get_way.get_absolute_way(subdir, rand_number, "random"))
-                file_writer.writerow([get_way.get_absolute_way(
-                    subdir, i, "download",folderpath), get_way.relative_way_random(rand_number,folderpath), subdir])
+                shutil.copyfile(
+                    f"{folderpath}/{subdir}/{str(i).zfill(4)}", absolute_way)
+                file_writer.writerow([absolute_way, relative_way, subdir])
 
 
 def main(folderpath):
@@ -33,11 +33,10 @@ def main(folderpath):
         file_writer.writerow(
             ["Абсолютный путь", "Относительный путь", "Класс"])
     class_name = "cat"
-    copy_random_number(class_name,folderpath)
+    copy_random_number(class_name, folderpath)
     class_name = "dog"
-    copy_random_number(class_name,folderpath)
-
+    copy_random_number(class_name, folderpath)
 
 
 if __name__ == "__main__":
-    main()
+    main('dataset/')

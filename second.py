@@ -1,10 +1,11 @@
 import os
-import get_way
 import shutil
 import csv
 
-#копирование в другую директорию
-def copy_to_another(subdir:str,folderpath)->None:
+# копирование в другую директорию
+
+
+def copy_to_another(subdir: str, folderpath) -> None:
     """копирует файлы(картинки) в другую директорию и создает csv файл и записывает туда абсолютный и относительный путь
     Args:
         subdir (str): название подкотолога(класса)
@@ -12,11 +13,13 @@ def copy_to_another(subdir:str,folderpath)->None:
     with open("annotation_changed.csv", mode="a", encoding='utf-8') as w_file:
         file_writer = csv.writer(w_file, delimiter=";", lineterminator="\n")
         for i in range(1020):
-            if (os.path.isfile(get_way.get_absolute_way(subdir, i, "download",folderpath)) == True):
-                shutil.copyfile(get_way.get_absolute_way(
-                    subdir, i, "download"), get_way.get_absolute_way(subdir, i, "changed",folderpath))
-                file_writer.writerow([get_way.get_absolute_way(
-                    subdir, i, "download",folderpath), get_way.relative_way_changed(subdir, i), subdir])
+            relative_way = f'dataset/{subdir}/{str(i).zfill(4)}.jpg'
+            absolute_way = f'{folderpath}/{subdir}/{str(i).zfill(4)}.jpg'
+            if (os.path.isfile(absolute_way) == True):
+                shutil.copyfile(
+                    absolute_way, f"{folderpath}/changed_dataset/{str(i).zfill(4)}")
+                file_writer.writerow(
+                    f"{folderpath}/{subdir}/{str(i).zfill(4)}.jpg", f"dataset/changed_dataset/{subdir}_{str(i).zfill(4)}.jpg", subdir)
 
 
 def main(folderpath):
@@ -28,11 +31,11 @@ def main(folderpath):
         file_writer.writerow(
             ["Абсолютный путь", "Относительный путь", "Класс"])
     class_name = "cat"
-    copy_to_another(class_name,folderpath)
+    copy_to_another(class_name, folderpath)
     class_name = "dog"
-    copy_to_another(class_name,folderpath)
+    copy_to_another(class_name, folderpath)
     print("Конец")
 
 
 if __name__ == "__main__":
-    main()
+    main('dataset/')

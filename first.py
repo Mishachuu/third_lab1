@@ -1,6 +1,5 @@
 import csv
 import os
-import get_way
 
 def create_annotation(subdir:str, folderpath) -> None:
     """создает csv файл и записывает туда абсолют. и относит. путь файла
@@ -11,9 +10,10 @@ def create_annotation(subdir:str, folderpath) -> None:
     with open("annotation.csv", mode="a", encoding='utf-8') as w_file:
         file_writer = csv.writer(w_file, delimiter=";", lineterminator='\n')
         for i in range(1020):
-            if (os.path.isfile(get_way.get_absolute_way(subdir, i, "download")) == True):
-                file_writer.writerow([get_way.get_absolute_way(
-                    subdir, i, "download",folderpath), get_way.relative_way_dataset(subdir, i,folderpath), subdir])
+            relative_way = f'dataset/{subdir}/{str(i).zfill(4)}.jpg'
+            absolute_way = f'{folderpath}/{subdir}/{str(i).zfill(4)}.jpg'
+            if (os.path.isfile(absolute_way)) == True:
+                file_writer.writerow([absolute_way, relative_way, subdir])
 
 
 def main(folderpath):
@@ -30,4 +30,4 @@ def main(folderpath):
 
 
 if __name__ == "__main__":
-    main()
+    main('dataset/')

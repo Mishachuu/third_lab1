@@ -12,7 +12,7 @@ class iterator:
             reader = csv.reader(file, delimiter = ";")
             for row in reader:
                 if row[2] == mark:
-                    self.mass.append(row[0] + ';' + row[2])
+                    self.mass.append(row[0])
                     self.limit += 1
 
 

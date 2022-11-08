@@ -23,14 +23,16 @@ class Window(QMainWindow):
         self.resize(800, 600)
         self.statusBar()
 
-        # self.
-
         menubar = self.menuBar()
         CreateCsv = menubar.addMenu('&Create Csv')
+
+        self.ImageLabel = QLabel(self)
+        self.ImageLabel.setGeometry(20, 20, 700, 600)
         gift = menubar.addMenu("Gift")
-        #self.movie = QMovie("cat-cat-ghoul.gif")
-        # self.imageLabel.setMovie(self.movie)
-        # self.movie.start()
+        self.Gift = QAction("U a ready?")
+        self.movie = QMovie("cat-cat-ghoul.gif")
+        self.ImageLabel.setMovie(self.movie)
+        #self.movie.start()
         self.CreateCsvDataset = QAction("Create Csv Dataset...", self)
         self.CreateCsvRandom = QAction(
             "Create Csv + create Random Dataset", self)
@@ -38,48 +40,65 @@ class Window(QMainWindow):
         CreateCsv.addAction(self.CreateCsvDataset)
         CreateCsv.addAction(self.CreateCsvRandom)
         CreateCsv.addAction(self.CreateCsvAnother)
-        self.CreateCsvAnother
+        gift.addAction(self.Gift)
+        self.CreateCsvDataset.triggered.connect(Create_Csv_Dataset)
+        self.CreateCsvAnother.triggered.connect(Create_Csv_AnotherDataset)
+        self.CreateCsvRandom.triggered.connect(Create_Csv_RandomDataset)
+        self.Gift.triggered.connect(gif)
 
-        self.imageLabel = QtWidgets.QLabel(self)
-        self.imageLabel.setGeometry(110, 59, 581, 321)
+        #self.ImageLabel = QtWidgets.QLabel(self)
+        #self.ImageLabel.setGeometry(110, 59, 581, 321)
 
         self.nextbutton = QtWidgets.QPushButton(self)
         self.nextbutton.setIcon(QIcon('1.png'))
         self.nextbutton.setIconSize(QtCore.QSize(250, 150))
         self.nextbutton.setGeometry(
             670, 560, 130, 40)
-        #self.nextbutton.clicked.connect(self.next())
+        self.nextbutton.clicked.connect(next)
         self.previousbutton = QtWidgets.QPushButton(self)
         self.previousbutton.setIcon(QIcon('2.png'))
         self.previousbutton.setIconSize(QtCore.QSize(250, 150))
         self.previousbutton.setGeometry(
             0, 560, 130, 40)
-        # self.previousbutton.clicked.connect(self.previous)
+        self.previousbutton.clicked.connect(previous)
         self.classbutton = QtWidgets.QPushButton(self)
         self.classbutton.setText("Cat")
         self.classbutton.setGeometry(
             310, 560, 200, 40)
-        # self.classbutton.clicked.connect(self.clas)
+        self.classbutton.clicked.connect(Class_)
 
 
 def Create_Csv_Dataset(self) -> None:
+    print(12)
     first.main(self.folderpath)
 
 
 def Create_Csv_AnotherDataset(self) -> None:
+    print(12)
     second.main(self.folderpath)
 
 
 def Create_Csv_RandomDataset(self) -> None:
+    print(12)
     third.main(self.folderpath)
 
 
 def next(self):
-    print()
+    print(12)
 
 
 def previous(self):
-    print()
+    print(12)
+
+
+def Class_(self):
+    print(12)
+
+
+def gif(self):
+    print(12)
+ 
+
 
 
 def application():
